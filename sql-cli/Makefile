@@ -3,7 +3,6 @@
 SHELL := /bin/bash
 SYSTEM_PIP := pip
 
-
 clean:  ## Remove temporary files
 	@echo "Removing cached and temporary files from current directory"
 	@rm -rf logs dist
@@ -31,7 +30,7 @@ pre-commit:  # Run pre-commit
 flow:  # Build and run the latest version of flow
 
 test:  # Run tests
-	@TERMINAL_WIDTH=3000 _TYPER_FORCE_DISABLE_TERMINAL=1 PYTHONWARNINGS="ignore" poetry run pytest
+	@TERMINAL_WIDTH=3000 _TYPER_FORCE_DISABLE_TERMINAL=1 PYTHONWARNINGS="ignore" poetry run pytest $(PYTEST_ARGS)
 
 release:  # Build a package
 	@echo -e "If this is your first time, please, manually follow these two steps: \n" \
