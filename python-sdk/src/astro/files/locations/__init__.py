@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 import importlib
 from pathlib import Path
-from typing import Optional
 
 from astro.constants import FileLocation
 from astro.files.locations.base import BaseFileLocation
@@ -11,7 +12,7 @@ DEFAULT_CONN_TYPE_TO_MODULE_PATH["https"] = DEFAULT_CONN_TYPE_TO_MODULE_PATH["ht
 DEFAULT_CONN_TYPE_TO_MODULE_PATH["gs"] = DEFAULT_CONN_TYPE_TO_MODULE_PATH["gcs"]
 
 
-def create_file_location(path: str, conn_id: Optional[str] = None) -> BaseFileLocation:
+def create_file_location(path: str, conn_id: str | None = None) -> BaseFileLocation:
     """
     Location factory method to generate location class
 

@@ -1,4 +1,6 @@
-from typing import IO, Any, Optional, Union
+from __future__ import annotations
+
+from typing import IO, Any
 
 import click
 from rich.highlighter import ReprHighlighter
@@ -22,7 +24,7 @@ def rich_format_error(self: click.ClickException) -> None:
     Mimics original click.ClickException.echo() function but with rich formatting.
     """
     console = _get_rich_console(stderr=True)
-    ctx: Union[click.Context, None] = getattr(self, "ctx", None)
+    ctx: click.Context | None = getattr(self, "ctx", None)
     if ctx is not None:
         console.print(ctx.get_usage())
 
@@ -46,7 +48,7 @@ def rprint(
     *objects: Any,
     sep: str = " ",
     end: str = "\n",
-    file: Optional[IO[str]] = None,
+    file: IO[str] | None = None,
     flush: bool = False,  # skipcq: PYL-W0613
 ) -> None:
     r"""Print object(s) supplied via positional arguments.

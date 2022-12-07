@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 import os
 from datetime import datetime
 from io import StringIO
-from typing import List
 
 import pandas as pd
 import requests
@@ -41,7 +42,7 @@ def load_and_group_covid_data():
 
 
 @aql.dataframe(columns_names_capitalization="original")
-def find_worst_covid_month(dfs: List[pd.DataFrame]):
+def find_worst_covid_month(dfs: list[pd.DataFrame]):
     """
     Takes a list of dataframes and then finds the month with the worst covid outbreak
     :param dfs: a list of DFs containing COVID data

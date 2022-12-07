@@ -1,14 +1,15 @@
+from __future__ import annotations
+
 import tempfile
-from typing import Optional
 
 import smart_open
 
 
 def copy_remote_file_to_local(
     source_filepath: str,
-    target_filepath: Optional[str] = None,
+    target_filepath: str | None = None,
     is_binary: bool = False,
-    transport_params: Optional[dict] = None,
+    transport_params: dict | None = None,
 ) -> str:
     """
     Copy the contents of a file (which may be available locally or remotely) to a local file.

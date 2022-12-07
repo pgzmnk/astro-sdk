@@ -9,6 +9,8 @@ Run test:
     python3 -m unittest tests.operators.test_load_file.TestLoadFile.test_aql_local_file_to_postgres
 
 """
+from __future__ import annotations
+
 import os
 import pathlib
 from unittest import mock

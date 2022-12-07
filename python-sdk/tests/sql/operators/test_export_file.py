@@ -9,6 +9,8 @@ Run test:
     python3 -m unittest tests.operators.test_export_file.TestSaveFile.test_save_postgres_table_to_local
 
 """
+from __future__ import annotations
+
 import os
 import pathlib
 import tempfile
