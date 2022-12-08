@@ -48,12 +48,11 @@ def test_autoloader_load_file_local(database_table_fixture):
     indirect=True,
     ids=["delta"],
 )
-def test_autoloader_load_file_s3(database_table_fixture):
-    with pytest.raises(ValueError):
-        file = File("s3://tmp9/databricks-test/", conn_id="default_aws")
-        database, table = database_table_fixture
-        database.load_file_to_table(
-            input_file=file,
-            output_table=table,
-            load_options=default_delta_options,
-        )
+def test_delta_load_file_s3(database_table_fixture):
+    from astro.constants import FileType
+
+    file = File("s3://tmp9/databricks-test/", conn_id="default_aws", filetype=FileType.CSV)
+    database, table = database_table_fixture
+    database.load_file_to_table(input_file=file, output_table=table)
+    assert database.table_exists(table)
+    database.drop_table(table)

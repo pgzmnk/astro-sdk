@@ -66,3 +66,17 @@ class S3Location(BaseFileLocation):
         https://github.com/OpenLineage/OpenLineage/blob/main/spec/Naming.md
         """
         return urlparse(self.path).path
+
+    def databricks_settings(self) -> dict:
+        """
+        Required settings to upload this file into databricks. Only needed for cloud storage systems
+        like S3
+        :return: A dictionary of settings keys to settings values
+        """
+        credentials = self.hook.get_credentials()
+        return {
+            "fs.s3a.aws.credentials.provider": "org.apache.hadoop.fs.s3a.TemporaryAWSCredentialsProvider",
+            "fs.s3a.access.key": credentials.access_key,
+            "fs.s3a.secret.key": credentials.secret_key,
+            "fs.s3a.session.token": credentials.token,
+        }
