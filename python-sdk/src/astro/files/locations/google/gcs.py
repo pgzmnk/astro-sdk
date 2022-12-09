@@ -43,6 +43,21 @@ class GCSLocation(BaseFileLocation):
             object_name = object_name[1:]
         return int(self.hook.get_size(bucket_name=bucket_name, object_name=object_name))
 
+    def databricks_settings(self) -> dict:
+        """
+        Required settings to upload this file into databricks. Only needed for cloud storage systems
+        like S3
+        :return: A dictionary of settings keys to settings values
+        """
+        credentials = self.hook.get_credentials()
+        return {
+            "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+            "spark.hadoop.fs.gs.auth.service.account.email": credentials.service_account_email,
+            "spark.hadoop.fs.gs.project.id": credentials.project_id,
+            "spark.hadoop.fs.gs.auth.service.account.private.key": credentials.client_id,
+            "spark.hadoop.fs.gs.auth.service.account.private.key.id": credentials.client_secret,
+        }
+
     @property
     def openlineage_dataset_namespace(self) -> str:
         """
