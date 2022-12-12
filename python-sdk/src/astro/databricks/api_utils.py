@@ -24,6 +24,7 @@ log = logging.getLogger(__name__)
 def delete_secret_scope(scope_name: str, api_client: ApiClient) -> None:
     """
     Delete the scope we created to prevent littering the databricks secret store with one-time scopes.
+
     :param scope_name: name of scope to delete
     :param api_client: populated databricks client
     """
@@ -32,7 +33,7 @@ def delete_secret_scope(scope_name: str, api_client: ApiClient) -> None:
         secrets.delete_scope(scope_name)
     except HTTPError as h:
         # We don't care if the resource doesn't exist since we're trying to delete it
-        if not h.response.json()["error_code"] == "RESOURCE_DOES_NOT_EXIST":
+        if not h.response.json().get("error_code", "") == "RESOURCE_DOES_NOT_EXIST":
             raise h
 
 
@@ -42,6 +43,7 @@ def create_secrets(scope_name: str, filesystem_secrets: Dict[str, str], api_clie
     Before we can transfer data from external file sources (s3, GCS, etc.) we first need to upload the relevant
     secrets to databricks, so we can use them in the autoloader config. This allows us to perform ad-hoc queries
     that are not dependent on existing settings.
+
     :param scope_name: the name of the secret scope. placing all secrets in a single scope makes them easy to
         delete later
     :param filesystem_secrets: a dictionary of k,v secrets where the key is the secret name and the value is
