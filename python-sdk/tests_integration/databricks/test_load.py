@@ -79,6 +79,10 @@ def test_delta_load_file_gcs(database_table_fixture):
         filetype=FileType.CSV,
     )
     database, table = database_table_fixture
-    database.load_file_to_table(input_file=file, output_table=table)
+    database.load_file_to_table(
+        input_file=file,
+        output_table=table,
+        load_options=DeltaLoadOptions.get_default_delta_options(),
+    )
     assert database.table_exists(table)
     database.drop_table(table)
