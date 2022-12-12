@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from urllib.parse import urlparse, urlunparse
 
 from airflow.providers.google.cloud.hooks.gcs import GCSHook
@@ -49,14 +50,16 @@ class GCSLocation(BaseFileLocation):
         like S3
         :return: A dictionary of settings keys to settings values
         """
-        credentials = self.hook.get_credentials()
-        return {
-            "spark.hadoop.google.cloud.auth.service.account.enable": "true",
-            "spark.hadoop.fs.gs.auth.service.account.email": credentials.service_account_email,
-            "spark.hadoop.fs.gs.project.id": credentials.project_id,
-            "spark.hadoop.fs.gs.auth.service.account.private.key": credentials.client_id,
-            "spark.hadoop.fs.gs.auth.service.account.private.key.id": credentials.client_secret,
-        }
+        creds_dict = self.hook.get_connection(self.conn_id).extra_dejson
+        with open(creds_dict["key_path"]) as f:
+            c = json.loads(f.read())
+            return {
+                "spark.hadoop.google.cloud.auth.service.account.enable": "true",
+                "spark.hadoop.fs.gs.auth.service.account.email": c["client_email"],
+                "spark.hadoop.fs.gs.project.id": c["project_id"],
+                "spark.hadoop.fs.gs.auth.service.account.private.key": c["private_key"],
+                "spark.hadoop.fs.gs.auth.service.account.private.key.id": c["private_key_id"],
+            }
 
     @property
     def openlineage_dataset_namespace(self) -> str:

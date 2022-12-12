@@ -21,7 +21,7 @@ from astro.table import BaseTable
 
 cwd = pathlib.Path(__file__).parent
 
-supported_file_locations = [FileLocation.LOCAL, FileLocation.S3]
+supported_file_locations = [FileLocation.LOCAL, FileLocation.S3, FileLocation.GS]
 
 
 def load_file_to_delta(
@@ -50,7 +50,7 @@ def load_file_to_delta(
     dbfs_file_path = None
     if input_file.location.location_type == FileLocation.LOCAL:
         dbfs_file_path = _load_load_file_to_dbfs(api_client, input_file)
-    elif input_file.location.location_type == FileLocation.S3:
+    elif input_file.location.location_type in [FileLocation.S3, FileLocation.GS]:
         delta_load_options.load_secrets = True
         delete_secret_scope(delta_load_options.secret_scope, api_client=api_client)
         _load_secrets_to_databricks(api_client, input_file, delta_load_options.secret_scope)
