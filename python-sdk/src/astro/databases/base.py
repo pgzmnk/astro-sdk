@@ -334,7 +334,10 @@ class BaseDatabase(ABC):
         :param table: The table to be deleted.
         """
         statement = self._drop_table_statement.format(self.get_table_qualified_name(table))
-        self.run_sql(statement)
+        if self.sql_type == "mssql":
+            self.run_sql(statement, autocommit=True)
+        else:
+            self.run_sql(statement)
 
     # ---------------------------------------------------------
     # Table load methods
@@ -760,9 +763,18 @@ class BaseDatabase(ABC):
         :param table: table to count
         :return: The number of rows in the table
         """
-        result = self.run_sql(
-            f"select count(*) from {self.get_table_qualified_name(table)}"  # skipcq: BAN-B608
-        ).scalar()
+        if self.connection.engine.name == "mssql":
+            from astro.databases.mssql import MssqlDatabase
+
+            if isinstance(self, MssqlDatabase):
+                result = self.run_sql(
+                    f"select count(*) from "
+                    f"{self.get_table_qualified_name(table, fully_qualified=True)}"  # skipcq: BAN-B608
+                ).scalar()
+        else:
+            result = self.run_sql(
+                f"select count(*) from {self.get_table_qualified_name(table)}"  # skipcq: BAN-B608
+            ).scalar()
         return result
 
     def parameterize_variable(self, variable: str):

@@ -147,11 +147,12 @@ def test_inlets_outlets_non_supported_ds():
     "database_table_fixture",
     [
         {
-            "database": Database.SQLITE,
+            # "database": Database.SQLITE,
+            "database": Database.MSSQL
         },
     ],
     indirect=True,
-    ids=["Sqlite"],
+    ids=["mssql"],
 )
 @pytest.mark.parametrize("if_exists", ["replace", "append"])
 def test_tables_creation_if_they_dont_exist(database_table_fixture, if_exists):

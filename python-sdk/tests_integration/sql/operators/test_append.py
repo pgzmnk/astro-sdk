@@ -53,14 +53,15 @@ def append_params(request):
 @pytest.mark.parametrize(
     "database_table_fixture",
     [
-        {"database": Database.SNOWFLAKE},
-        {"database": Database.BIGQUERY},
-        {"database": Database.POSTGRES},
-        {"database": Database.SQLITE},
-        {"database": Database.REDSHIFT},
+        # {"database": Database.SNOWFLAKE},
+        # {"database": Database.BIGQUERY},
+        # {"database": Database.POSTGRES},
+        # {"database": Database.SQLITE},
+        # {"database": Database.REDSHIFT},
+        {"database": Database.MSSQL},
     ],
     indirect=True,
-    ids=["snowflake", "bigquery", "postgresql", "sqlite", "redshift"],
+    ids=["mssql"],
 )
 @pytest.mark.parametrize(
     "multiple_tables_fixture",

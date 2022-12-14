@@ -26,29 +26,34 @@ test_df_2 = pandas.DataFrame({"Numbers": [1, 2, 3], "Colors": ["red", "white", "
 @pytest.mark.parametrize(
     "database_table_fixture",
     [
+        # {
+        #     "database": Database.SNOWFLAKE,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.BIGQUERY,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.POSTGRES,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.SQLITE,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.REDSHIFT,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
         {
-            "database": Database.SNOWFLAKE,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.BIGQUERY,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.POSTGRES,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.SQLITE,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.REDSHIFT,
+            "database": Database.MSSQL,
             "file": File(path=str(CWD) + "/../../data/homes2.csv"),
         },
     ],
     indirect=True,
-    ids=["snowflake", "bigquery", "postgresql", "sqlite", "redshift"],
+    # ids=["snowflake", "bigquery", "postgresql", "sqlite", "redshift"],
+    ids=["mssql"],
 )
 def test_dataframe_from_sql_basic(sample_dag, database_table_fixture):
     """Test basic operation of dataframe operator."""
@@ -75,29 +80,33 @@ def test_dataframe_from_sql_basic(sample_dag, database_table_fixture):
 @pytest.mark.parametrize(
     "database_table_fixture",
     [
+        # {
+        #     "database": Database.SNOWFLAKE,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.BIGQUERY,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.POSTGRES,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.SQLITE,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.REDSHIFT,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
         {
-            "database": Database.SNOWFLAKE,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.BIGQUERY,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.POSTGRES,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.SQLITE,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.REDSHIFT,
+            "database": Database.MSSQL,
             "file": File(path=str(CWD) + "/../../data/homes2.csv"),
         },
     ],
     indirect=True,
-    ids=["snowflake", "bigquery", "postgresql", "sqlite", "redshift"],
+    ids=["mssql"],
 )
 def test_dataframe_from_sql_custom_task_id(sample_dag, database_table_fixture):
     """Test custom and taskId increment when same task is added multiple times."""
@@ -122,29 +131,33 @@ def test_dataframe_from_sql_custom_task_id(sample_dag, database_table_fixture):
 @pytest.mark.parametrize(
     "database_table_fixture",
     [
+        # {
+        #     "database": Database.SNOWFLAKE,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.BIGQUERY,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.POSTGRES,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.SQLITE,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.REDSHIFT,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
         {
-            "database": Database.SNOWFLAKE,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.BIGQUERY,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.POSTGRES,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.SQLITE,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.REDSHIFT,
+            "database": Database.MSSQL,
             "file": File(path=str(CWD) + "/../../data/homes2.csv"),
         },
     ],
     indirect=True,
-    ids=["snowflake", "bigquery", "postgresql", "sqlite", "redshift"],
+    ids=["mssql"],
 )
 def test_dataframe_from_sql_basic_op_arg(sample_dag, database_table_fixture):
     """Test basic operation of dataframe operator with op_args."""
@@ -170,29 +183,33 @@ def test_dataframe_from_sql_basic_op_arg(sample_dag, database_table_fixture):
 @pytest.mark.parametrize(
     "database_table_fixture",
     [
+        # {
+        #     "database": Database.SNOWFLAKE,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.BIGQUERY,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.POSTGRES,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.SQLITE,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
+        # {
+        #     "database": Database.REDSHIFT,
+        #     "file": File(path=str(CWD) + "/../../data/homes2.csv"),
+        # },
         {
-            "database": Database.SNOWFLAKE,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.BIGQUERY,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.POSTGRES,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.SQLITE,
-            "file": File(path=str(CWD) + "/../../data/homes2.csv"),
-        },
-        {
-            "database": Database.REDSHIFT,
+            "database": Database.MSSQL,
             "file": File(path=str(CWD) + "/../../data/homes2.csv"),
         },
     ],
     indirect=True,
-    ids=["snowflake", "bigquery", "postgresql", "sqlite", "redshift"],
+    ids=["mssql"],
 )
 def test_dataframe_from_sql_basic_op_arg_and_kwarg(
     sample_dag,
@@ -245,11 +262,12 @@ def test_postgres_dataframe_without_table_arg(sample_dag):
 @pytest.mark.parametrize(
     "conn_id",
     [
-        "bigquery",
-        "postgres_conn",
-        "redshift_conn",
-        "snowflake_conn",
-        "sqlite_conn",
+        # "bigquery",
+        # "postgres_conn",
+        # "redshift_conn",
+        # "snowflake_conn",
+        # "sqlite_conn",
+        "mssql_conn"
     ],
 )
 def test_empty_dataframe_fail(sample_dag, conn_id):
@@ -275,11 +293,12 @@ def test_empty_dataframe_fail(sample_dag, conn_id):
 @pytest.mark.parametrize(
     "conn_id",
     [
-        "bigquery",
-        "postgres_conn",
-        "redshift_conn",
-        "snowflake_conn",
-        "sqlite_conn",
+        # "bigquery",
+        # "postgres_conn",
+        # "redshift_conn",
+        # "snowflake_conn",
+        # "sqlite_conn",
+        "mssql_conn"
     ],
 )
 def test_dataframe_replace_table_if_exist(sample_dag, conn_id):
@@ -308,11 +327,12 @@ def test_dataframe_replace_table_if_exist(sample_dag, conn_id):
 @pytest.mark.parametrize(
     "conn_id",
     [
-        "bigquery",
-        "postgres_conn",
-        "redshift_conn",
-        "snowflake_conn",
-        "sqlite_conn",
+        # "bigquery",
+        # "postgres_conn",
+        # "redshift_conn",
+        # "snowflake_conn",
+        # "sqlite_conn",
+        "mssql_conn"
     ],
 )
 def test_dataframe_append_table_if_exist(sample_dag, conn_id):
