@@ -186,6 +186,10 @@ class MssqlDatabase(BaseDatabase):
                 )
                 print("RESULT$$$$$$$$$$$$$", result)
                 return result
+        else:
+            # this is used for append
+            result = self.connection.execute(sql, parameters)
+            return result
 
     def create_schema_if_needed(self, schema: str | None, location: str | None = None) -> None:
         """
